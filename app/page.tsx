@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Lock, Shield, Users, ChevronDown, Heart } from "lucide-react";
 import { useState } from "react";
 
@@ -233,12 +234,7 @@ export default function PrivacyPolicy() {
             </p>
             <p className="text-gray-700 leading-relaxed">
               By using MindLogs, you acknowledge that you have read and
-              understood this Privacy Policy. If you have any questions, please
-              contact us at{" "}
-              <span className="text-[#9B87F5] font-medium">
-                privacy@mindlogs.app
-              </span>
-              .
+              understood this Privacy Policy.
             </p>
           </motion.div>
 

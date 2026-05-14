@@ -11,25 +11,12 @@ const merriweather = Merriweather({
 });
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - MindLogs',
+  title: 'MindLogs | Privacy Policy',
   description: 'Your thoughts, emotions, and journal entries stay protected and secure. Learn how MindLogs protects your privacy.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/mindlogs-logo.png', type: 'image/png' }],
+    apple: '/mindlogs-logo.png',
   },
 }
 
