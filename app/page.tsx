@@ -55,33 +55,33 @@ export default function PrivacyPolicy() {
     {
       question: "Is my journal private?",
       answer:
-        "Yes, absolutely. Your journal entries are encrypted and stored securely. Only you have access to your personal journal unless you explicitly choose to share entries.",
+        "Yes. Your journal content is encrypted on your device. Data is only transmitted when required for features such as account synchronization or AI-powered analysis."
     },
     {
-      question: "Can MindLogs read my entries?",
+      question: "Does MindLogs use my journal to train AI models?",
       answer:
-        "MindLogs uses AI only to provide insights and support when you opt-in for AI-powered features. These analyses are generated on secure servers and never used to train models or shared with third parties.",
+        "No. Journal content processed for AI feedback is used only to generate the requested analysis and is not used by MindLogs to train AI models."
     },
     {
-      question: "Why does MindLogs need microphone permission?",
+      question: "Who processes payments?",
       answer:
-        "Microphone access is only used when you choose voice journaling or voice-to-text features. MindLogs does not secretly record users. Audio access is permission-based and fully user-controlled.",
+        "All subscription payments are processed through Apple App Store or Google Play. MindLogs does not receive or store your payment card details."
     },
     {
-      question: "How do I delete my data?",
+      question: "Can I delete my data?",
       answer:
-        "You can request permanent deletion of your account and all associated data from your account settings. We permanently remove all your data from our active systems within 30 days of your request.",
+        "Yes. You can delete your account and request removal of your personal data at any time by contacting hello@mindlogs.app or through available account settings."
     },
     {
-      question: "Is my backend data secure?",
+      question: "Are AI features optional?",
       answer:
-        "Yes. We use industry-standard encryption (AES-256) for data at rest and TLS 1.3 for data in transit. Our servers are hosted with secure infrastructure providers with SOC 2 compliance.",
+        "Yes. AI-generated feedback and analysis are only provided when you choose to use those features."
     },
     {
-      question: "Is payment information stored?",
+      question: "Do you sell my personal data?",
       answer:
-        "No. Payment processing is handled by secure third-party providers. MindLogs never stores credit card information. Only billing receipts are retained for accounting purposes.",
-    },
+        "No. MindLogs does not sell personal data to third parties."
+    }
   ];
 
   return (
@@ -125,7 +125,7 @@ export default function PrivacyPolicy() {
 
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl font-serif font-bold text-gray-900 mb-3"
+          className="text-4xl sm:text-5xl font-sans font-bold text-gray-900 mb-3"
         >
           Your Privacy,{" "}
           <span className="bg-gradient-to-r from-[#9B87F5] to-[#7c6ed4] bg-clip-text text-transparent">
@@ -185,7 +185,7 @@ export default function PrivacyPolicy() {
                   >
                     <Icon className="w-6 h-6 text-[#9B87F5]" />
                   </motion.div>
-                  <h3 className="font-serif text-lg font-bold text-gray-900 mb-2">
+                  <h3 className="font-sans text-lg font-bold text-gray-900 mb-2">
                     {card.title}
                   </h3>
                   <p className="text-gray-600 text-sm">{card.description}</p>
@@ -205,7 +205,7 @@ export default function PrivacyPolicy() {
       >
         <div className="relative bg-gradient-to-br from-white/80 to-[#f3f0ff]/80 backdrop-blur-xl border border-[#9B87F5]/40 rounded-3xl p-8 sm:p-12 shadow-lg shadow-[#9B87F5]/20">
           <div className="absolute -top-3 -left-3 w-6 h-6 bg-gradient-to-br from-[#9B87F5] to-[#7c6ed4] rounded-full opacity-30" />
-          <p className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 text-center leading-relaxed italic">
+          <p className="font-sans text-2xl sm:text-3xl font-bold text-gray-900 text-center leading-relaxed italic">
             MindLogs is built to help you reflect safely, privately, and without
             judgment.
           </p>
@@ -221,67 +221,96 @@ export default function PrivacyPolicy() {
         className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
       >
         <div className="space-y-12">
-          {/* Introduction */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Introduction
-            </h2>
             <p className="text-gray-700 leading-relaxed">
-              Welcome to MindLogs. We are committed to protecting your privacy
-              and ensuring you have a positive experience on our platform. This
-              Privacy Policy explains our information practices, how we collect,
-              use, and protect your data, and your rights as a user.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              By using MindLogs, you acknowledge that you have read and
-              understood this Privacy Policy.
+              At MindLogs we take your privacy very seriously. This Privacy
+              Policy explains what personal data we process when you use the{" "}
+              <strong>MindLogs</strong> application and the{" "}
+              <a
+                href="https://mindlogs.app"
+                className="text-[#9B87F5] font-medium hover:underline"
+              >
+                mindlogs.app
+              </a>{" "}
+              website (the &quot;Service&quot;), for what purposes, on what
+              legal basis and what rights you have, in accordance with
+              Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018
+              (LOPDGDD).
             </p>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* Information We Collect */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Information We Collect
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              1. Data controller
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              When you use MindLogs, we collect the following information:
+              <strong>Evergreen Projects S.L.</strong>
+              <br />
+              Tax ID (CIF): B67516815
+              <br />
+              Address: Avenida Roma 43, 08029 Barcelona, Spain
+              <br />
+              Privacy contact:{" "}
+              <a
+                href="mailto:hello@mindlogs.app"
+                className="text-[#9B87F5] font-medium hover:underline"
+              >
+                hello@mindlogs.app
+              </a>
+            </p>
+          </motion.div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
+
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              2. Data we process
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              Depending on how you use the Service, we may process the
+              following categories of data:
             </p>
             <ul className="space-y-3 ml-4">
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Account Information:</strong> Your name, email
-                  address, and password (encrypted)
+                  <strong>Account data:</strong> email address and authentication
+                  data needed to create and access your account.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Journal Entries:</strong> All content you write in
-                  your journal
+                  <strong>Journal content:</strong> the emotions, sensations,
+                  thoughts, reflections and other information you record in your
+                  entries. This information may reveal data about your mood and
+                  emotional wellbeing (see section 4).
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Voice Data:</strong> Audio recordings only when you
-                  explicitly use voice journaling
+                  <strong>Subscription and payment data:</strong> information
+                  about your plan, subscription status and purchases. Payments are
+                  processed through the App Store or Google Play;{" "}
+                  <strong>we do not receive or store your card details</strong>.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Usage Data:</strong> Interaction patterns and feature
-                  usage (anonymized)
+                  <strong>Usage and technical data:</strong> information about how
+                  the application works, device identifiers, diagnostic data and
+                  aggregated usage statistics that help us improve the Service.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Device Information:</strong> Browser type, IP address,
-                  and device identifiers
+                  <strong>Communications:</strong> the data you provide when you
+                  contact support.
                 </span>
               </li>
             </ul>
@@ -289,414 +318,347 @@ export default function PrivacyPolicy() {
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* Why We Collect */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Why We Collect Your Information
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              3. Where your journal is stored
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We collect your information to:
+              The content of your journal is stored{" "}
+              <strong>encrypted on your device</strong>. When you use features
+              that require a connection —such as syncing your account or
+              artificial intelligence feedback and analysis— the strictly
+              necessary data is transmitted securely to our providers in order
+              to deliver those features (see sections 5 and 6).
+            </p>
+          </motion.div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
+
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              4. Special category data
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              The content you record in MindLogs may include sensitive
+              information relating to your emotional or mental health,
+              considered a &quot;special category&quot; of data under the GDPR.
+              We process this information{" "}
+              <strong>on the basis of your explicit consent</strong>, which you
+              give by using the Service to record your entries and, where
+              applicable, by activating the artificial intelligence features.
+              You may withdraw your consent at any time by ceasing to use the
+              Service and deleting your data.
+            </p>
+          </motion.div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
+
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              5. Purposes and legal bases
+            </h2>
+            <div className="overflow-x-auto rounded-xl border border-[#9B87F5]/30">
+              <table className="w-full text-sm text-gray-700">
+                <thead>
+                  <tr className="border-b border-[#9B87F5]/30 bg-[#f3f0ff]/50">
+                    <th className="px-4 py-3 text-left font-semibold text-gray-900">
+                      Purpose
+                    </th>
+                    <th className="px-4 py-3 text-left font-semibold text-gray-900">
+                      Legal basis
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-[#9B87F5]/20">
+                    <td className="px-4 py-3">
+                      Create and manage your account and provide the Service
+                    </td>
+                    <td className="px-4 py-3">
+                      Performance of the contract (these Terms of Use)
+                    </td>
+                  </tr>
+                  <tr className="border-b border-[#9B87F5]/20">
+                    <td className="px-4 py-3">
+                      Record and display your journal content
+                    </td>
+                    <td className="px-4 py-3">
+                      Explicit consent (special category data)
+                    </td>
+                  </tr>
+                  <tr className="border-b border-[#9B87F5]/20">
+                    <td className="px-4 py-3">
+                      Generate artificial intelligence feedback and analysis
+                    </td>
+                    <td className="px-4 py-3">Explicit consent</td>
+                  </tr>
+                  <tr className="border-b border-[#9B87F5]/20">
+                    <td className="px-4 py-3">
+                      Manage subscriptions, payments and the referral program
+                    </td>
+                    <td className="px-4 py-3">Performance of the contract</td>
+                  </tr>
+                  <tr className="border-b border-[#9B87F5]/20">
+                    <td className="px-4 py-3">
+                      Maintain security and improve the Service
+                    </td>
+                    <td className="px-4 py-3">Legitimate interest</td>
+                  </tr>
+                  <tr className="border-b border-[#9B87F5]/20">
+                    <td className="px-4 py-3">Handle your support queries</td>
+                    <td className="px-4 py-3">
+                      Performance of the contract / Legitimate interest
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-4 py-3">
+                      Comply with legal obligations (e.g. tax)
+                    </td>
+                    <td className="px-4 py-3">Legal obligation</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
+
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              6. Providers and recipients
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              We do not sell your personal data. To provide the Service we rely
+              on providers who act as data processors, under contracts that
+              guarantee the protection of your data:
             </p>
             <ul className="space-y-3 ml-4">
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  Provide, maintain, and improve our journaling platform
+                  <strong>Supabase:</strong> authentication infrastructure,
+                  account management, subscriptions and referrals.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  Personalize your experience and deliver relevant features
+                  <strong>RevenueCat:</strong> technical management of
+                  subscription status.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  Provide customer support and respond to your inquiries
+                  <strong>OpenAI:</strong> processing of the text needed to
+                  generate artificial intelligence feedback and analysis, when
+                  you activate these features.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
-                <span>Prevent fraud and ensure platform security</span>
+                <span>
+                  <strong>Apple App Store and Google Play:</strong> processing of
+                  payments and subscriptions.
+                </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
-                <span>Comply with legal obligations and enforce our terms</span>
+                <span>
+                  <strong>Web hosting provider:</strong> hosting of the
+                  mindlogs.app website.
+                </span>
               </li>
             </ul>
+            <p className="text-gray-700 leading-relaxed">
+              We may also disclose data to public authorities where there is a
+              legal obligation to do so.
+            </p>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* AI Analysis */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              AI Journal Analysis & Emotional Insights
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              7. International transfers
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              MindLogs offers optional AI-powered insights to help you
-              understand your emotional patterns and wellness trends.
-              Here&apos;s how it works:
+              Some of our providers may process data outside the European
+              Economic Area. In those cases, we ensure that the transfer is
+              covered by valid mechanisms under the GDPR, such as European
+              Commission adequacy decisions or Standard Contractual Clauses.
+            </p>
+          </motion.div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
+
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              8. Retention period
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              We keep your data for as long as you maintain an active account
+              and use the Service. When you delete your account or withdraw
+              your consent, we will delete or anonymise your data, except for
+              data we are required to keep in order to comply with legal
+              obligations or to handle possible liabilities, for the periods
+              legally required.
+            </p>
+          </motion.div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
+
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              9. Your rights
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              You may exercise the following rights at any time:
             </p>
             <ul className="space-y-3 ml-4">
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Opt-In Analysis:</strong> AI insights are only
-                  generated when you explicitly enable this feature
+                  <strong>Access</strong> to your personal data.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Secure Processing:</strong> Your journal entries are
-                  analyzed on secure, encrypted servers
+                  <strong>Rectification</strong> of inaccurate or incomplete
+                  data.
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>No Model Training:</strong> Your data is never used to
-                  train AI models or shared with AI providers
+                  <strong>Erasure</strong> of your data (&quot;right to be
+                  forgotten&quot;).
                 </span>
               </li>
               <li className="flex gap-3 text-gray-700">
                 <span className="text-[#9B87F5] font-bold">•</span>
                 <span>
-                  <strong>Permanent Privacy:</strong> AI insights are stored
-                  securely and remain completely private
+                  <strong>Restriction</strong> of processing.
+                </span>
+              </li>
+              <li className="flex gap-3 text-gray-700">
+                <span className="text-[#9B87F5] font-bold">•</span>
+                <span>
+                  <strong>Objection</strong> to processing.
+                </span>
+              </li>
+              <li className="flex gap-3 text-gray-700">
+                <span className="text-[#9B87F5] font-bold">•</span>
+                <span>
+                  <strong>Portability</strong> of your data.
+                </span>
+              </li>
+              <li className="flex gap-3 text-gray-700">
+                <span className="text-[#9B87F5] font-bold">•</span>
+                <span>
+                  <strong>Withdrawal of consent</strong> given, without
+                  affecting the lawfulness of prior processing.
                 </span>
               </li>
             </ul>
-          </motion.div>
-
-          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
-
-          {/* Voice Permissions */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Voice & Microphone Permissions
-            </h2>
             <p className="text-gray-700 leading-relaxed">
-              MindLogs may request microphone access for voice journaling
-              features. Here&apos;s how we handle voice data:
-            </p>
-            <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Permission-Based:</strong> Microphone access is only
-                  requested when you choose to use voice features
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>No Secret Recording:</strong> MindLogs never records
-                  audio without explicit user action
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Full Control:</strong> You can revoke microphone
-                  permissions at any time through your device settings
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Encrypted Storage:</strong> Voice recordings are
-                  encrypted and stored securely
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Transcription Privacy:</strong> Voice-to-text
-                  conversions are processed securely and never shared
-                </span>
-              </li>
-            </ul>
-          </motion.div>
-
-          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
-
-          {/* Cookies & Analytics */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Cookies & Analytics
-            </h2>
-            <p className="text-gray-700 leading-relaxed">
-              We use cookies and analytics tools to improve user experience.
-              These help us understand how you use MindLogs and identify areas
-              for improvement. You can control cookie preferences in your
-              browser settings, though some functionality may be limited if you
-              disable cookies.
+              To exercise them, write to us at{" "}
+              <a
+                href="mailto:hello@mindlogs.app"
+                className="text-[#9B87F5] font-medium hover:underline"
+              >
+                hello@mindlogs.app
+              </a>
+              . If you believe we have not handled your request properly, you
+              have the right to lodge a complaint with the Spanish Data
+              Protection Agency (
+              <a
+                href="https://www.aepd.es"
+                rel="nofollow noopener"
+                className="text-[#9B87F5] font-medium hover:underline"
+              >
+                www.aepd.es
+              </a>
+              ).
             </p>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* Third-Party Services */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Third-Party Services
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              10. Security
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              MindLogs integrates with select third-party services only for
-              essential functionality:
-            </p>
-            <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Payment Processing:</strong> Secure providers for
-                  subscription management (PCI-DSS compliant)
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Cloud Storage:</strong> Encrypted infrastructure for
-                  data backup and recovery
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Authentication:</strong> Optional social login
-                  providers (data minimized)
-                </span>
-              </li>
-            </ul>
-            <p className="text-gray-700 leading-relaxed mt-4">
-              We have strict data processing agreements with all third parties
-              ensuring they follow our privacy standards.
+              We apply appropriate technical and organisational measures to
+              protect your data, including{" "}
+              <strong>encryption of the journal content on your device</strong>{" "}
+              and the use of secure connections. No system is completely
+              infallible, but we work to maintain a level of security
+              commensurate with the sensitivity of the information processed.
             </p>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* Data Protection */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Data Protection & Encryption
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              11. Minors
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Your security is our highest priority. MindLogs employs
-              industry-leading encryption standards:
+              The Service is intended for people over{" "}
+              <strong>16 years of age</strong>. We do not knowingly collect data
+              from minors under that age. If we become aware that we have
+              processed data of a minor under 16 without the appropriate legal
+              basis, we will delete it.
             </p>
-            <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Data at Rest:</strong> AES-256 encryption for all
-                  stored data
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Data in Transit:</strong> TLS 1.3 for all data
-                  transmission
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Password Security:</strong> Passwords are hashed using
-                  industry-standard algorithms
-                </span>
-              </li>
-            </ul>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* Backend Security */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Data Storage & Backend Security
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              12. Cookies and similar technologies
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              MindLogs securely stores user data using encrypted backend systems
-              with the following protections:
+              The mindlogs.app website uses only the technical cookies necessary
+              for its operation. Should we incorporate analytics or third-party
+              cookies in the future, we will inform you and, where appropriate,
+              obtain your prior consent.
             </p>
-            <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Redundant Systems:</strong> Automatic backups across
-                  geographically distributed data centers
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Access Controls:</strong> Role-based access with
-                  strict authentication requirements
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Monitoring:</strong> 24/7 security monitoring and
-                  intrusion detection
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Compliance:</strong> SOC 2 Type II certified
-                  infrastructure
-                </span>
-              </li>
-            </ul>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* User Rights */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Your Rights
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              13. Changes to this Policy
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              You have the right to:
+              We may update this Privacy Policy to reflect legal or Service
+              changes. We will publish the current version on this page
+              indicating the date of the last update and, where the changes are
+              substantial, we will notify you by reasonable means.
             </p>
-            <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Access Your Data:</strong> Request a copy of all
-                  personal data we hold
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Correct Your Data:</strong> Update inaccurate
-                  information
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Delete Your Data:</strong> Request permanent deletion
-                  of your account and data
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Opt-Out:</strong> Disable optional features like AI
-                  analysis or analytics
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Port Your Data:</strong> Export your data in standard
-                  formats
-                </span>
-              </li>
-            </ul>
           </motion.div>
 
           <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
 
-          {/* Data Deletion Policy */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Data Deletion Policy
+            <h2 className="font-sans text-3xl font-bold text-gray-900">
+              14. Contact
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              MindLogs respects your right to privacy even after you leave.
-              Here&apos;s our data deletion process:
-            </p>
-            <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Account Deletion Request:</strong> You can request
-                  account deletion anytime from your settings
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Processing Timeline:</strong> We process deletion
-                  requests within 30 days
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Permanent Removal:</strong> All journal entries,
-                  account data, and voice recordings are securely deleted
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Backup Deletion:</strong> Data is removed from backup
-                  systems within 90 days
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Confirmation:</strong> We send confirmation once
-                  deletion is complete
-                </span>
-              </li>
-            </ul>
-          </motion.div>
-
-          <div className="h-px bg-gradient-to-r from-transparent via-[#9B87F5]/30 to-transparent" />
-
-          {/* Account Deletion */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="font-serif text-3xl font-bold text-gray-900">
-              Account Deletion
-            </h2>
-            <p className="text-gray-700 leading-relaxed">
-              To delete your MindLogs account and all associated personal data:
-            </p>
-            <ol className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">1.</span>
-                <span>Log in to your MindLogs account</span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">2.</span>
-                <span>
-                  Go to Settings &gt; Privacy & Security &gt; Delete Account
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-purple-500 font-bold">3.</span>
-                <span>Review what will be deleted</span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-purple-500 font-bold">4.</span>
-                <span>Confirm deletion (this cannot be undone)</span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-purple-500 font-bold">5.</span>
-                <span>
-                  Receive confirmation email when deletion is complete
-                </span>
-              </li>
-            </ol>
-            <p className="text-gray-700 leading-relaxed mt-4">
-              If you cannot access your account, email us at{" "}
-              <span className="text-[#9B87F5] font-medium">
-                privacy@mindlogs.app
-              </span>{" "}
-              with proof of account ownership.
+              If you have any questions about this Privacy Policy or about the
+              processing of your data, contact us at{" "}
+              <a
+                href="mailto:hello@mindlogs.app"
+                className="text-[#9B87F5] font-medium hover:underline"
+              >
+                hello@mindlogs.app
+              </a>
+              .
             </p>
           </motion.div>
         </div>
@@ -710,7 +672,7 @@ export default function PrivacyPolicy() {
         viewport={{ once: true }}
         className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
       >
-        <h2 className="font-serif text-3xl font-bold text-gray-900 text-center mb-12">
+        <h2 className="font-sans text-3xl font-bold text-gray-900 text-center mb-12">
           Frequently Asked Questions
         </h2>
         <div className="space-y-4">
@@ -726,7 +688,7 @@ export default function PrivacyPolicy() {
                 }
                 className="w-full px-6 py-4 flex items-center justify-between hover:bg-[#f3f0ff]/30 transition-colors"
               >
-                <span className="font-serif text-lg font-semibold text-gray-900 text-left">
+                <span className="font-sans text-lg font-semibold text-gray-900 text-left">
                   {item.question}
                 </span>
                 <motion.div
