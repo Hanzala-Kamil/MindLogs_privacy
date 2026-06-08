@@ -1,12 +1,60 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Lock, Shield, Users, ChevronDown, Heart } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { renderWithEmphasis } from "@/lib/render-emphasis";
+import {
+  getStoredLanguage,
+  translations,
+  type Language,
+} from "@/lib/translations";
+
+const highlightIcons = [Lock, Heart, Users, Shield];
+
+function renderIntro(text: string) {
+  const linkParts = text.split("mindlogs.app");
+
+  const renderPart = (part: string, keyPrefix: string) => {
+    const appParts = part.split("MindLogs");
+    return appParts.map((segment, index) => (
+      <span key={`${keyPrefix}-${index}`}>
+        {segment}
+        {index < appParts.length - 1 && <strong>MindLogs</strong>}
+      </span>
+    ));
+  };
+
+  return (
+    <>
+      {renderPart(linkParts[0], "before")}
+      <a
+        href="https://mindlogs.app"
+        className="text-[#9B87F5] font-medium hover:underline"
+      >
+        mindlogs.app
+      </a>
+      {renderPart(linkParts[1], "after")}
+    </>
+  );
+}
 
 export default function PrivacyPolicy() {
+  const [language, setLanguage] = useState<Language>("en");
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  useEffect(() => {
+    setLanguage(getStoredLanguage());
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    localStorage.setItem("mindlogs-lang", language);
+  }, [language]);
+
+  const t = translations[language];
+  const policy = t.policy.sections;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,67 +76,13 @@ export default function PrivacyPolicy() {
     },
   };
 
-  const highlightCards = [
-    {
-      icon: Lock,
-      title: "End-to-End Security",
-      description: "Your data is encrypted and secured",
-    },
-    {
-      icon: Heart,
-      title: "Your Data Stays Private",
-      description: "We never share your information",
-    },
-    {
-      icon: Users,
-      title: "No Selling Personal Data",
-      description: "Your privacy is never commodified",
-    },
-    {
-      icon: Shield,
-      title: "AI Conversations Protected",
-      description: "All AI insights remain private",
-    },
-  ];
-
-  const faqItems = [
-    {
-      question: "Is my journal private?",
-      answer:
-        "Yes. Your journal content is encrypted on your device. Data is only transmitted when required for features such as account synchronization or AI-powered analysis."
-    },
-    {
-      question: "Does MindLogs use my journal to train AI models?",
-      answer:
-        "No. Journal content processed for AI feedback is used only to generate the requested analysis and is not used by MindLogs to train AI models."
-    },
-    {
-      question: "Who processes payments?",
-      answer:
-        "All subscription payments are processed through Apple App Store or Google Play. MindLogs does not receive or store your payment card details."
-    },
-    {
-      question: "Can I delete my data?",
-      answer:
-        "Yes. You can delete your account and request removal of your personal data at any time by contacting hello@mindlogs.app or through available account settings."
-    },
-    {
-      question: "Are AI features optional?",
-      answer:
-        "Yes. AI-generated feedback and analysis are only provided when you choose to use those features."
-    },
-    {
-      question: "Do you sell my personal data?",
-      answer:
-        "No. MindLogs does not sell personal data to third parties."
-    }
-  ];
-
   return (
     <div
       className="min-h-screen bg-gradient-to-b from-white via-[#f3f0ff] to-[#ede9fe]"
       style={{ "--color-primary": "#9B87F5" } as React.CSSProperties}
     >
+      <LanguageSwitcher language={language} onChange={setLanguage} />
+
       <motion.section
         variants={containerVariants}
         initial="hidden"
@@ -127,9 +121,9 @@ export default function PrivacyPolicy() {
           variants={itemVariants}
           className="text-4xl sm:text-5xl font-sans font-bold text-gray-900 mb-3"
         >
-          Your Privacy,{" "}
+          {t.hero.title}{" "}
           <span className="bg-gradient-to-r from-[#9B87F5] to-[#7c6ed4] bg-clip-text text-transparent">
-            Our Promise
+            {t.hero.titleHighlight}
           </span>
         </motion.h1>
 
@@ -137,9 +131,7 @@ export default function PrivacyPolicy() {
           variants={itemVariants}
           className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-5 leading-relaxed"
         >
-          Your thoughts, emotions, and journal entries stay protected and
-          secure. At MindLogs, we believe privacy is fundamental to emotional
-          wellness.
+          {t.hero.subtitle}
         </motion.p>
 
         <motion.button
@@ -154,49 +146,36 @@ export default function PrivacyPolicy() {
           }
           className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9B87F5] to-[#7c6ed4] text-white px-8 py-3 rounded-full font-medium hover:shadow-lg hover:shadow-[#9B87F5]/30 transition-all"
         >
-          Read Policy
+          {t.hero.readPolicy}
           <ChevronDown className="w-5 h-5" />
         </motion.button>
       </motion.section>
 
-      {/* Highlight Cards */}
-      <motion.section
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
-      >
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {highlightCards.map((card, index) => {
-            const Icon = card.icon;
+          {t.highlightCards.map((card, index) => {
+            const Icon = highlightIcons[index];
             return (
-              <motion.div
+              <div
                 key={index}
-                variants={itemVariants}
-                whileHover={{ y: -5 }}
-                className="relative group"
+                className="relative group transition-transform duration-200 hover:-translate-y-1"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#9B87F5] to-[#7c6ed4] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity blur-lg" />
                 <div className="relative bg-white/60 backdrop-blur-sm border border-[#9B87F5]/30 rounded-2xl p-6 hover:border-[#9B87F5]/60 transition-all">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#f3f0ff] to-[#ede9fe] rounded-full mb-4"
-                  >
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#f3f0ff] to-[#ede9fe] rounded-full mb-4 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-6">
                     <Icon className="w-6 h-6 text-[#9B87F5]" />
-                  </motion.div>
+                  </div>
                   <h3 className="font-sans text-lg font-bold text-gray-900 mb-2">
                     {card.title}
                   </h3>
                   <p className="text-gray-600 text-sm">{card.description}</p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
-      </motion.section>
+      </section>
 
-      {/* Trust Quote */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -206,13 +185,11 @@ export default function PrivacyPolicy() {
         <div className="relative bg-gradient-to-br from-white/80 to-[#f3f0ff]/80 backdrop-blur-xl border border-[#9B87F5]/40 rounded-3xl p-8 sm:p-12 shadow-lg shadow-[#9B87F5]/20">
           <div className="absolute -top-3 -left-3 w-6 h-6 bg-gradient-to-br from-[#9B87F5] to-[#7c6ed4] rounded-full opacity-30" />
           <p className="font-sans text-2xl sm:text-3xl font-bold text-gray-900 text-center leading-relaxed italic">
-            MindLogs is built to help you reflect safely, privately, and without
-            judgment.
+            {t.trustQuote}
           </p>
         </div>
       </motion.section>
 
-      {/* Main Privacy Content */}
       <motion.section
         id="privacy"
         initial={{ opacity: 0 }}
@@ -223,19 +200,7 @@ export default function PrivacyPolicy() {
         <div className="space-y-12">
           <motion.div variants={itemVariants} className="space-y-4">
             <p className="text-gray-700 leading-relaxed">
-              At MindLogs we take your privacy very seriously. This Privacy
-              Policy explains what personal data we process when you use the{" "}
-              <strong>MindLogs</strong> application and the{" "}
-              <a
-                href="https://mindlogs.app"
-                className="text-[#9B87F5] font-medium hover:underline"
-              >
-                mindlogs.app
-              </a>{" "}
-              website (the &quot;Service&quot;), for what purposes, on what
-              legal basis and what rights you have, in accordance with
-              Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018
-              (LOPDGDD).
+              {renderIntro(t.policy.intro)}
             </p>
           </motion.div>
 
@@ -243,21 +208,21 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              1. Data controller
+              {policy.controller.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              <strong>Evergreen Projects S.L.</strong>
+              <strong>{policy.controller.company}</strong>
               <br />
-              Tax ID (CIF): B67516815
+              {policy.controller.taxId}
               <br />
-              Address: Avenida Roma 43, 08029 Barcelona, Spain
+              {policy.controller.address}
               <br />
-              Privacy contact:{" "}
+              {policy.controller.contact}{" "}
               <a
-                href="mailto:hello@mindlogs.app"
+                href={`mailto:${t.contactEmail}`}
                 className="text-[#9B87F5] font-medium hover:underline"
               >
-                hello@mindlogs.app
+                {t.contactEmail}
               </a>
             </p>
           </motion.div>
@@ -266,53 +231,26 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              2. Data we process
+              {policy.dataWeProcess.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Depending on how you use the Service, we may process the
-              following categories of data:
+              {policy.dataWeProcess.intro}
             </p>
             <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Account data:</strong> email address and authentication
-                  data needed to create and access your account.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Journal content:</strong> the emotions, sensations,
-                  thoughts, reflections and other information you record in your
-                  entries. This information may reveal data about your mood and
-                  emotional wellbeing (see section 4).
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Subscription and payment data:</strong> information
-                  about your plan, subscription status and purchases. Payments are
-                  processed through the App Store or Google Play;{" "}
-                  <strong>we do not receive or store your card details</strong>.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Usage and technical data:</strong> information about how
-                  the application works, device identifiers, diagnostic data and
-                  aggregated usage statistics that help us improve the Service.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Communications:</strong> the data you provide when you
-                  contact support.
-                </span>
-              </li>
+              {policy.dataWeProcess.items.map((item) => (
+                <li key={item.label} className="flex gap-3 text-gray-700">
+                  <span className="text-[#9B87F5] font-bold">•</span>
+                  <span>
+                    <strong>{item.label}</strong> {item.text}
+                    {"emphasis" in item && item.emphasis ? (
+                      <>
+                        {" "}
+                        <strong>{item.emphasis}</strong>.
+                      </>
+                    ) : null}
+                  </span>
+                </li>
+              ))}
             </ul>
           </motion.div>
 
@@ -320,15 +258,13 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              3. Where your journal is stored
+              {policy.journalStorage.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              The content of your journal is stored{" "}
-              <strong>encrypted on your device</strong>. When you use features
-              that require a connection —such as syncing your account or
-              artificial intelligence feedback and analysis— the strictly
-              necessary data is transmitted securely to our providers in order
-              to deliver those features (see sections 5 and 6).
+              {renderWithEmphasis(
+                policy.journalStorage.text,
+                policy.journalStorage.emphasis
+              )}
             </p>
           </motion.div>
 
@@ -336,18 +272,13 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              4. Special category data
+              {policy.specialCategory.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              The content you record in MindLogs may include sensitive
-              information relating to your emotional or mental health,
-              considered a &quot;special category&quot; of data under the GDPR.
-              We process this information{" "}
-              <strong>on the basis of your explicit consent</strong>, which you
-              give by using the Service to record your entries and, where
-              applicable, by activating the artificial intelligence features.
-              You may withdraw your consent at any time by ceasing to use the
-              Service and deleting your data.
+              {renderWithEmphasis(
+                policy.specialCategory.text,
+                policy.specialCategory.emphasis
+              )}
             </p>
           </motion.div>
 
@@ -355,67 +286,30 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              5. Purposes and legal bases
+              {policy.purposes.title}
             </h2>
             <div className="overflow-x-auto rounded-xl border border-[#9B87F5]/30">
               <table className="w-full text-sm text-gray-700">
                 <thead>
                   <tr className="border-b border-[#9B87F5]/30 bg-[#f3f0ff]/50">
                     <th className="px-4 py-3 text-left font-semibold text-gray-900">
-                      Purpose
+                      {policy.purposes.purposeHeader}
                     </th>
                     <th className="px-4 py-3 text-left font-semibold text-gray-900">
-                      Legal basis
+                      {policy.purposes.legalBasisHeader}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-[#9B87F5]/20">
-                    <td className="px-4 py-3">
-                      Create and manage your account and provide the Service
-                    </td>
-                    <td className="px-4 py-3">
-                      Performance of the contract (these Terms of Use)
-                    </td>
-                  </tr>
-                  <tr className="border-b border-[#9B87F5]/20">
-                    <td className="px-4 py-3">
-                      Record and display your journal content
-                    </td>
-                    <td className="px-4 py-3">
-                      Explicit consent (special category data)
-                    </td>
-                  </tr>
-                  <tr className="border-b border-[#9B87F5]/20">
-                    <td className="px-4 py-3">
-                      Generate artificial intelligence feedback and analysis
-                    </td>
-                    <td className="px-4 py-3">Explicit consent</td>
-                  </tr>
-                  <tr className="border-b border-[#9B87F5]/20">
-                    <td className="px-4 py-3">
-                      Manage subscriptions, payments and the referral program
-                    </td>
-                    <td className="px-4 py-3">Performance of the contract</td>
-                  </tr>
-                  <tr className="border-b border-[#9B87F5]/20">
-                    <td className="px-4 py-3">
-                      Maintain security and improve the Service
-                    </td>
-                    <td className="px-4 py-3">Legitimate interest</td>
-                  </tr>
-                  <tr className="border-b border-[#9B87F5]/20">
-                    <td className="px-4 py-3">Handle your support queries</td>
-                    <td className="px-4 py-3">
-                      Performance of the contract / Legitimate interest
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-3">
-                      Comply with legal obligations (e.g. tax)
-                    </td>
-                    <td className="px-4 py-3">Legal obligation</td>
-                  </tr>
+                  {policy.purposes.rows.map((row) => (
+                    <tr
+                      key={row.purpose}
+                      className="border-b border-[#9B87F5]/20 last:border-b-0"
+                    >
+                      <td className="px-4 py-3">{row.purpose}</td>
+                      <td className="px-4 py-3">{row.legalBasis}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -425,54 +319,23 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              6. Providers and recipients
+              {policy.providers.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We do not sell your personal data. To provide the Service we rely
-              on providers who act as data processors, under contracts that
-              guarantee the protection of your data:
+              {policy.providers.intro}
             </p>
             <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Supabase:</strong> authentication infrastructure,
-                  account management, subscriptions and referrals.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>RevenueCat:</strong> technical management of
-                  subscription status.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>OpenAI:</strong> processing of the text needed to
-                  generate artificial intelligence feedback and analysis, when
-                  you activate these features.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Apple App Store and Google Play:</strong> processing of
-                  payments and subscriptions.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Web hosting provider:</strong> hosting of the
-                  mindlogs.app website.
-                </span>
-              </li>
+              {policy.providers.items.map((item) => (
+                <li key={item.label} className="flex gap-3 text-gray-700">
+                  <span className="text-[#9B87F5] font-bold">•</span>
+                  <span>
+                    <strong>{item.label}</strong> {item.text}
+                  </span>
+                </li>
+              ))}
             </ul>
             <p className="text-gray-700 leading-relaxed">
-              We may also disclose data to public authorities where there is a
-              legal obligation to do so.
+              {policy.providers.outro}
             </p>
           </motion.div>
 
@@ -480,13 +343,10 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              7. International transfers
+              {policy.transfers.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Some of our providers may process data outside the European
-              Economic Area. In those cases, we ensure that the transfer is
-              covered by valid mechanisms under the GDPR, such as European
-              Commission adequacy decisions or Standard Contractual Clauses.
+              {policy.transfers.text}
             </p>
           </motion.div>
 
@@ -494,15 +354,10 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              8. Retention period
+              {policy.retention.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We keep your data for as long as you maintain an active account
-              and use the Service. When you delete your account or withdraw
-              your consent, we will delete or anonymise your data, except for
-              data we are required to keep in order to comply with legal
-              obligations or to handle possible liabilities, for the periods
-              legally required.
+              {policy.retention.text}
             </p>
           </motion.div>
 
@@ -510,69 +365,30 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              9. Your rights
+              {policy.rights.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              You may exercise the following rights at any time:
+              {policy.rights.intro}
             </p>
             <ul className="space-y-3 ml-4">
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Access</strong> to your personal data.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Rectification</strong> of inaccurate or incomplete
-                  data.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Erasure</strong> of your data (&quot;right to be
-                  forgotten&quot;).
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Restriction</strong> of processing.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Objection</strong> to processing.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Portability</strong> of your data.
-                </span>
-              </li>
-              <li className="flex gap-3 text-gray-700">
-                <span className="text-[#9B87F5] font-bold">•</span>
-                <span>
-                  <strong>Withdrawal of consent</strong> given, without
-                  affecting the lawfulness of prior processing.
-                </span>
-              </li>
+              {policy.rights.items.map((item) => (
+                <li key={item.label} className="flex gap-3 text-gray-700">
+                  <span className="text-[#9B87F5] font-bold">•</span>
+                  <span>
+                    <strong>{item.label}</strong> {item.text}
+                  </span>
+                </li>
+              ))}
             </ul>
             <p className="text-gray-700 leading-relaxed">
-              To exercise them, write to us at{" "}
+              {policy.rights.outroBefore}{" "}
               <a
-                href="mailto:hello@mindlogs.app"
+                href={`mailto:${t.contactEmail}`}
                 className="text-[#9B87F5] font-medium hover:underline"
               >
-                hello@mindlogs.app
+                {t.contactEmail}
               </a>
-              . If you believe we have not handled your request properly, you
-              have the right to lodge a complaint with the Spanish Data
-              Protection Agency (
+              {policy.rights.outroMiddle}
               <a
                 href="https://www.aepd.es"
                 rel="nofollow noopener"
@@ -580,7 +396,7 @@ export default function PrivacyPolicy() {
               >
                 www.aepd.es
               </a>
-              ).
+              {policy.rights.outroAfter}
             </p>
           </motion.div>
 
@@ -588,15 +404,13 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              10. Security
+              {policy.security.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We apply appropriate technical and organisational measures to
-              protect your data, including{" "}
-              <strong>encryption of the journal content on your device</strong>{" "}
-              and the use of secure connections. No system is completely
-              infallible, but we work to maintain a level of security
-              commensurate with the sensitivity of the information processed.
+              {renderWithEmphasis(
+                policy.security.text,
+                policy.security.emphasis
+              )}
             </p>
           </motion.div>
 
@@ -604,14 +418,10 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              11. Minors
+              {policy.minors.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              The Service is intended for people over{" "}
-              <strong>16 years of age</strong>. We do not knowingly collect data
-              from minors under that age. If we become aware that we have
-              processed data of a minor under 16 without the appropriate legal
-              basis, we will delete it.
+              {renderWithEmphasis(policy.minors.text, policy.minors.emphasis)}
             </p>
           </motion.div>
 
@@ -619,13 +429,10 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              12. Cookies and similar technologies
+              {policy.cookies.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              The mindlogs.app website uses only the technical cookies necessary
-              for its operation. Should we incorporate analytics or third-party
-              cookies in the future, we will inform you and, where appropriate,
-              obtain your prior consent.
+              {policy.cookies.text}
             </p>
           </motion.div>
 
@@ -633,13 +440,10 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              13. Changes to this Policy
+              {policy.changes.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We may update this Privacy Policy to reflect legal or Service
-              changes. We will publish the current version on this page
-              indicating the date of the last update and, where the changes are
-              substantial, we will notify you by reasonable means.
+              {policy.changes.text}
             </p>
           </motion.div>
 
@@ -647,42 +451,41 @@ export default function PrivacyPolicy() {
 
           <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="font-sans text-3xl font-bold text-gray-900">
-              14. Contact
+              {policy.contact.title}
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              If you have any questions about this Privacy Policy or about the
-              processing of your data, contact us at{" "}
+              {policy.contact.textBefore}{" "}
               <a
-                href="mailto:hello@mindlogs.app"
+                href={`mailto:${t.contactEmail}`}
                 className="text-[#9B87F5] font-medium hover:underline"
               >
-                hello@mindlogs.app
+                {t.contactEmail}
               </a>
-              .
+              {policy.contact.textAfter}
             </p>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* FAQ Section */}
       <motion.section
         id="faq"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+        className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 pb-24"
       >
         <h2 className="font-sans text-3xl font-bold text-gray-900 text-center mb-12">
-          Frequently Asked Questions
+          {t.faq.title}
         </h2>
         <div className="space-y-4">
-          {faqItems.map((item, index) => (
+          {t.faq.items.map((item, index) => (
             <motion.div
-              key={index}
+              key={item.question}
               initial={false}
               className="border border-[#9B87F5]/30 rounded-xl overflow-hidden bg-white/40 backdrop-blur-sm hover:border-[#9B87F5]/60 transition-all"
             >
               <button
+                type="button"
                 onClick={() =>
                   setExpandedFaq(expandedFaq === index ? null : index)
                 }
