@@ -219,7 +219,7 @@ export default function PrivacyPolicy() {
               <br />
               {policy.controller.contact}{" "}
               <a
-                href={`mailto:${t.contactEmail}`}
+                href="#"
                 className="text-[#9B87F5] font-medium hover:underline"
               >
                 {t.contactEmail}
@@ -263,7 +263,7 @@ export default function PrivacyPolicy() {
             <p className="text-gray-700 leading-relaxed">
               {renderWithEmphasis(
                 policy.journalStorage.text,
-                policy.journalStorage.emphasis
+                policy.journalStorage.emphasis,
               )}
             </p>
           </motion.div>
@@ -277,7 +277,7 @@ export default function PrivacyPolicy() {
             <p className="text-gray-700 leading-relaxed">
               {renderWithEmphasis(
                 policy.specialCategory.text,
-                policy.specialCategory.emphasis
+                policy.specialCategory.emphasis,
               )}
             </p>
           </motion.div>
@@ -383,7 +383,7 @@ export default function PrivacyPolicy() {
             <p className="text-gray-700 leading-relaxed">
               {policy.rights.outroBefore}{" "}
               <a
-                href={`mailto:${t.contactEmail}`}
+                href="#"
                 className="text-[#9B87F5] font-medium hover:underline"
               >
                 {t.contactEmail}
@@ -409,7 +409,7 @@ export default function PrivacyPolicy() {
             <p className="text-gray-700 leading-relaxed">
               {renderWithEmphasis(
                 policy.security.text,
-                policy.security.emphasis
+                policy.security.emphasis,
               )}
             </p>
           </motion.div>
@@ -456,7 +456,7 @@ export default function PrivacyPolicy() {
             <p className="text-gray-700 leading-relaxed">
               {policy.contact.textBefore}{" "}
               <a
-                href={`mailto:${t.contactEmail}`}
+                href="#"
                 className="text-[#9B87F5] font-medium hover:underline"
               >
                 {t.contactEmail}

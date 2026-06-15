@@ -97,7 +97,8 @@ export const translations = {
               legalBasis: "Explicit consent",
             },
             {
-              purpose: "Manage subscriptions, payments and the referral program",
+              purpose:
+                "Manage subscriptions, payments and the referral program",
               legalBasis: "Performance of the contract",
             },
             {
@@ -156,7 +157,10 @@ export const translations = {
           intro: "You may exercise the following rights at any time:",
           items: [
             { label: "Access", text: "to your personal data." },
-            { label: "Rectification", text: "of inaccurate or incomplete data." },
+            {
+              label: "Rectification",
+              text: "of inaccurate or incomplete data.",
+            },
             {
               label: "Erasure",
               text: 'of your data ("right to be forgotten").',
@@ -223,11 +227,11 @@ export const translations = {
           answer:
             "Yes. You can delete your account and request removal of your personal data at any time by contacting hello@mindlogs.app or through available account settings.",
         },
-        {
-          question: "Are AI features optional?",
-          answer:
-            "Yes. AI-generated feedback and analysis are only provided when you choose to use those features.",
-        },
+        // {
+        //   question: "Are AI features optional?",
+        //   answer:
+        //     "Yes. AI-generated feedback and analysis are only provided when you choose to use those features.",
+        // },
         {
           question: "Do you sell my personal data?",
           answer: "No. MindLogs does not sell personal data to third parties.",
@@ -324,14 +328,17 @@ export const translations = {
             },
             {
               purpose: "Registrar y mostrar el contenido de tu diario",
-              legalBasis: "Consentimiento explícito (datos de categoría especial)",
+              legalBasis:
+                "Consentimiento explícito (datos de categoría especial)",
             },
             {
-              purpose: "Generar comentarios y análisis de inteligencia artificial",
+              purpose:
+                "Generar comentarios y análisis de inteligencia artificial",
               legalBasis: "Consentimiento explícito",
             },
             {
-              purpose: "Gestionar suscripciones, pagos y el programa de referidos",
+              purpose:
+                "Gestionar suscripciones, pagos y el programa de referidos",
               legalBasis: "Ejecución del contrato",
             },
             {
@@ -460,15 +467,14 @@ export const translations = {
           answer:
             "Sí. Puedes eliminar tu cuenta y solicitar la supresión de tus datos personales en cualquier momento contactando con hola@mindlogs.app o a través de la configuración de la cuenta.",
         },
-        {
-          question: "¿Las funciones de IA son opcionales?",
-          answer:
-            "Sí. Los comentarios y análisis generados por IA solo se proporcionan cuando eliges utilizar esas funciones.",
-        },
+        // {
+        //   question: "¿Las funciones de IA son opcionales?",
+        //   answer:
+        //     "Sí. Los comentarios y análisis generados por IA solo se proporcionan cuando eliges utilizar esas funciones.",
+        // },
         {
           question: "¿Venden mis datos personales?",
-          answer:
-            "No. MindLogs no vende datos personales a terceros.",
+          answer: "No. MindLogs no vende datos personales a terceros.",
         },
       ],
     },
